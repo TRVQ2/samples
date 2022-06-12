@@ -31,3 +31,15 @@ def count_sheep_best(n):
 
 
 print(count_sheep_mine(3))
+
+
+# Hello world! :)
+def greet():
+    return "hello world!"
+
+
+def greet1():
+    return "he%sworld!" % ("llo ")
+
+
+print(greet())
