@@ -39,5 +39,15 @@ def check(a, e):
     return e in a
 
 
-print("True: " + str(check([101, 45, 75, 105, 99, 107], 107)))
-print("False: " + str(check([78, 117, 110, 99, 104, 117, 107, 115], 8)))
+# print("True: " + str(check([101, 45, 75, 105, 99, 107], 107)))
+# print("False: " + str(check([78, 117, 110, 99, 104, 117, 107, 115], 8)))
+
+##########
+# function determines if there is enough fuel
+##########
+def zero_fuel(distance_to_pump, mpg, fuel_left):
+    return distance_to_pump <= mpg * fuel_left
+
+
+print(f"zero_fuel(50, 25, 2)={zero_fuel(50, 25, 2)}")
+print(f"zero_fuel(150, 25, 2)={zero_fuel(150, 25, 2)}")
