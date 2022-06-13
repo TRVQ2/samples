@@ -30,16 +30,17 @@ def count_sheep_best(n):
     return ''.join(f"{i} sheep..." for i in range(1, n+1))
 
 
-print(count_sheep_mine(3))
+# print(count_sheep_mine(3))
 
 
 # Hello world! :)
 def greet():
-    return "hello world!"
-
-
-def greet1():
     return "he%sworld!" % ("llo ")
 
 
-print(greet())
+# Remove exclamation marks
+def remove_exclamation_marks(s):
+    return s.replace("!", "")
+
+
+print(remove_exclamation_marks('Hi! Hello!'))
