@@ -27,6 +27,18 @@ def invert(list):
 
 ##########
 ##########
+def positive_sum(arr):
+    return sum(x for x in arr if x > 0)
+
+
+##########
+##########
+def filter_list(list):
+    return [x for x in list if type(x) == int]
+
+
+##########
+##########
 def is_square(n):
     return n == 0 or (n > 0 and (n**.5) % 1 == 0)
 

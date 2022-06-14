@@ -43,4 +43,24 @@ def remove_exclamation_marks(s):
     return s.replace("!", "")
 
 
-print(remove_exclamation_marks('Hi! Hello!'))
+# print(remove_exclamation_marks('Hi! Hello!'))
+
+
+# Find unique words
+def findUniqueWords1(str):
+    output = []
+    for x in str.split():
+        if x not in output:
+            output.append(x)
+    return output
+
+
+def findUniqueWords(str):
+    return sorted(set(str.split()))
+
+
+# def findUniqueWords?(str): - is it possible to use something like self?
+#    return [x for x in str.split() if x not in self]
+
+
+print(findUniqueWords("This is a test This is a test"))

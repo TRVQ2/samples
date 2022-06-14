@@ -49,5 +49,41 @@ def zero_fuel(distance_to_pump, mpg, fuel_left):
     return distance_to_pump <= mpg * fuel_left
 
 
-print(f"zero_fuel(50, 25, 2)={zero_fuel(50, 25, 2)}")
-print(f"zero_fuel(150, 25, 2)={zero_fuel(150, 25, 2)}")
+# print(f"zero_fuel(50, 25, 2)={zero_fuel(50, 25, 2)}")
+# print(f"zero_fuel(150, 25, 2)={zero_fuel(150, 25, 2)}")
+
+
+def bool_to_word(boolean):
+    return "Yes" if boolean else "No"
+
+
+##########
+# function determines if candidate is "Senior" or "Open"
+##########
+def open_or_senior_my(data):
+    return ["Senior" if x[0] > 54 and x[1] > 7 else "Open" for x in data]
+
+
+def open_or_senior(d):
+    return ["Senior" if age > 54 and hcap > 7 else "Open" for (age, hcap) in d]
+
+
+'''
+input = [[18, 20], [45, 2], [61, 12], [37, 6], [21, 21], [78, 9]]
+print(open_or_senior(input))
+print(["Open", "Open", "Senior", "Open", "Open", "Senior"])
+'''
+
+
+##########
+# function returns sum of the lowest two items of positive integer array
+##########
+def sum_two_smallest_numbers_my(numbers):
+    return sum(x for x in sorted(numbers)[slice(2)])
+
+
+def sum_two_smallest_numbers_best(numbers):
+    return sum(sorted(numbers)[:2])
+
+
+''' print(sum_two_smallest_numbers([19, 5, 42, 2, 77]))  # 7 '''
