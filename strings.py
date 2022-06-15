@@ -18,7 +18,8 @@ def string_to_array2(s):
 # print(string_to_array2("         "))
 
 
-###########################################################
+#####
+#####
 def count_sheep_mine(n=0):
     result = ""
     for i in range(1, n+1):
@@ -33,20 +34,25 @@ def count_sheep_best(n):
 # print(count_sheep_mine(3))
 
 
+#####
 # Hello world! :)
+#####
 def greet():
     return "he%sworld!" % ("llo ")
 
 
+#####
 # Remove exclamation marks
+#####
 def remove_exclamation_marks(s):
     return s.replace("!", "")
 
 
 # print(remove_exclamation_marks('Hi! Hello!'))
 
-
+#####
 # Find unique words
+#####
 def findUniqueWords1(str):
     output = []
     for x in str.split():
@@ -63,4 +69,60 @@ def findUniqueWords(str):
 #    return [x for x in str.split() if x not in self]
 
 
-print(findUniqueWords("This is a test This is a test"))
+# print(findUniqueWords("This is a test This is a test"))
+
+
+def likes_long(names):
+    length = len(names)
+    if length == 0:
+        return "no one likes this"
+    elif length == 1:
+        return f"{names[0]} likes this"
+    elif length == 2:
+        return f"{names[0]} and {names[1]} like this"
+    elif length == 3:
+        return f"{names[0]}, {names[1]} and {names[2]} like this"
+    elif length > 3:
+        return f"{names[0]}, {names[1]} and 2 others like this"
+
+
+def likes_initial(names):
+    length = len(names)
+    out = "no one" if length == 0 else names[0]
+    if length > 2:
+        out += ", " + names[1]
+    if length > 1:
+        out += " and " + (f"{length - 2} others" if length > 3 else names[length-1])
+        out += " like this"
+    else:
+        out += " likes this"
+    return out
+
+
+def likes_my(names):
+    length = len(names)
+    return "{0}{1} {2} this".format(
+        "no one" if length == 0 else names[0],
+        ", " + names[1] if length > 2 else "",
+        "and %s like" % (
+            f"{length - 2} others" if length > 3 else names[length-1]
+        ) if length > 1 else "likes"
+    )
+
+
+def likes(names):
+    n = len(names)
+    return {
+        0: 'no one likes this',
+        1: '{} likes this',
+        2: '{} and {} like this',
+        3: '{}, {} and {} like this',
+        4: '{}, {} and {others} others like this'
+    }[min(4, n)].format(*names[:3], others=n-2)
+
+
+print(likes([]))
+print(likes(["Peter"]))
+print(likes(["Jacob", "Alex"]))
+print(likes(["Max", "John", "Mark"]))
+print(likes(["Alex", "Jacob", "Mark", "Max"]))
