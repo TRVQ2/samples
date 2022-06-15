@@ -100,13 +100,12 @@ def likes_initial(names):
 
 
 def likes_my(names):
-    length = len(names)
-    return "{0}{1} {2} this".format(
-        "no one" if length == 0 else names[0],
-        ", " + names[1] if length > 2 else "",
-        "and %s like" % (
-            f"{length - 2} others" if length > 3 else names[length-1]
-        ) if length > 1 else "likes"
+    n = len(names)
+    return "%s%s%s this" % (
+        "no one" if n == 0 else names[0],
+        ", " + names[1] if n > 2 else "",
+        " and %s like" % ("%s others" % (n - 2) if n > 3 else names[n-1])
+        if n > 1 else " likes"
     )
 
 
