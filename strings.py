@@ -73,26 +73,26 @@ def findUniqueWords(str):
 
 
 def likes_long(names):
-    length = len(names)
-    if length == 0:
+    n = len(names)
+    if n == 0:
         return "no one likes this"
-    elif length == 1:
+    elif n == 1:
         return f"{names[0]} likes this"
-    elif length == 2:
+    elif n == 2:
         return f"{names[0]} and {names[1]} like this"
-    elif length == 3:
+    elif n == 3:
         return f"{names[0]}, {names[1]} and {names[2]} like this"
-    elif length > 3:
-        return f"{names[0]}, {names[1]} and 2 others like this"
+    elif n > 3:
+        return f"{names[0]}, {names[1]} and {n - 2} others like this"
 
 
 def likes_initial(names):
-    length = len(names)
-    out = "no one" if length == 0 else names[0]
-    if length > 2:
+    n = len(names)
+    out = "no one" if n == 0 else names[0]
+    if n > 2:
         out += ", " + names[1]
-    if length > 1:
-        out += " and " + (f"{length - 2} others" if length > 3 else names[length-1])
+    if n > 1:
+        out += " and " + (f"{n - 2} others" if n > 3 else names[n-1])
         out += " like this"
     else:
         out += " likes this"
