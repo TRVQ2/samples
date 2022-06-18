@@ -1,5 +1,15 @@
-BITS_SEPARATOR = "0"
-MORSE_SEPARATOR = " "
+BITS_SEP = '0'
+BITS_SPACE = '0'
+BITS_CHAR_SEP = '000'  # BITS_SEP + BITS_SPACE + BITS_SEP
+BITS_WORD_SEP = '0000000'  # (BITS_SEP + BITS_SPACE) * 3 + BITS_SEP
+MORSE_SEP = " "
+MORSE_SPACE = " "
+MORSE_WORD_SEP = "   "  # MORSE_SEP + "MORSE_SPACE" + MORSE_SEP
+WORDS_SEP = " "
+TEMP_SPACE = '2'  # temporarily instead of BITS_SPACE and MORSE_SPACE
+BITS_TEMP_CHAR_SEP = '020'  # BITS_SEP + TEMP_SPACE + BITS_SEP
+BITS_TEMP_WORD_SEP = '0202020'  # (BITS_SEP + TEMP_SPACE) * 3 + BITS_SEP
+MORSE_TEMP_WORD_SEP = " 2 "  # MORSE_SEP + TEMP_SPACE + MORSE_SEP
 
 MORSE_TO_CHAR = {
     ".-": "A",
@@ -57,54 +67,47 @@ MORSE_TO_CHAR = {
     "...-..-": "$",
     ".--.-.": "@",
     "...---...": "SOS",
-    MORSE_SEPARATOR: MORSE_SEPARATOR  # E.G. STR_SEPARATOR
+    MORSE_SPACE: WORDS_SEP
 }
 
-BIT_TO_MORSE = {"111": "-", "1": ".", BITS_SEPARATOR: MORSE_SEPARATOR}
+BIT_TO_MORSE = {"111": "-", "1": ".", BITS_SPACE: MORSE_SPACE}
 
 CHAR_TO_MORSE = {}
 for i in MORSE_TO_CHAR:
     CHAR_TO_MORSE[MORSE_TO_CHAR[i]] = i
+MORSE_TO_CHAR[TEMP_SPACE] = WORDS_SEP  # "2": " "
 
 MORSE_TO_BIT = {}
 for i in BIT_TO_MORSE:
     MORSE_TO_BIT[BIT_TO_MORSE[i]] = i
-
-
-def split(str, split_char=" "):
-    out = []
-    temp = ''
-    for i in str:
-        if i == split_char and temp != '':
-            out.append(temp)
-            temp = ''
-        else:
-            temp += i
-    out.append(temp)
-    return out
+BIT_TO_MORSE[TEMP_SPACE] = MORSE_SPACE  # "2": " "
 
 
 def bits_to_morse(bits):
-    bits = bits.strip(BITS_SEPARATOR)
+    bits = bits.strip(BITS_SEP)
     import itertools
     speed = min(len(list(g)) for i, g in itertools.groupby(bits))
     # import re
     # speed = min(len(m) for m in re.findall(r'1+|0+', bits))
-    return
-    ''.join(BIT_TO_MORSE[b] for b in split(bits[::speed], BITS_SEPARATOR))
+    chars = bits[::speed].replace(BITS_WORD_SEP, BITS_TEMP_WORD_SEP) \
+                         .replace(BITS_CHAR_SEP, BITS_TEMP_CHAR_SEP) \
+                         .split(BITS_SEP)
+    return ''.join(BIT_TO_MORSE[b] for b in chars)
 
 
 def morse_to_str(morse):
-    return
-    ''.join(MORSE_TO_CHAR[c] for c in split(morse.strip(), MORSE_SEPARATOR))
+    words = morse.strip() \
+                 .replace(MORSE_WORD_SEP, MORSE_TEMP_WORD_SEP) \
+                 .split(MORSE_SEP)
+    return ''.join(MORSE_TO_CHAR[c] for c in words)
 
 
 def str_to_morse(str):
-    return MORSE_SEPARATOR.join(CHAR_TO_MORSE[c] for c in str.strip())
+    return MORSE_SEP.join(CHAR_TO_MORSE[c] for c in str.strip(WORDS_SEP))
 
 
 def morse_to_bits(morse):
-    return BITS_SEPARATOR.join(MORSE_TO_BIT[c] for c in morse.strip())
+    return BITS_SEP.join(MORSE_TO_BIT[c] for c in morse.strip(MORSE_SEP))
 
 
 # morse = bits_to_morse('111000111')
