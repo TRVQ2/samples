@@ -1,0 +1,34 @@
+# Useful links
+https://wpdatatables.com/best-atom-packages/
+
+# Python docs
+https://www.w3schools.com/python
+
+# Plugins I've installed and use
+file-icons - shows good icons for the tree view
+ask-stack - ask stack overflow - ctrl-alt-a ??????? currently doesn't work
+minimap
+minimap-highlight-selected
+highlight-selected
+plantuml-preview - generate plant uml -  ctrl-alt-p
+language-plantuml
+linter
+linter-pycodestyle
+platformio-ide-terminal
+python-debugger - alt-r (toggle), alt-shifr-r (breakpoint)
+autocomplete-python
+file-icons
+
+# Installed but haven't widely used
+advanced-open-file -
+intentions
+hydrogen - powerfull debugger, as far as I got
+
+# Popular plugins I haven't tried
+TODO-Show
+Teletype
+Advanced-open-file (by Osmose)
+atom-beautify
+
+###### Atom packages
+common-palette - ctrl-shift-p
