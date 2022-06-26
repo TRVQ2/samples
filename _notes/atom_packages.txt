@@ -18,6 +18,7 @@ platformio-ide-terminal
 python-debugger - alt-r (toggle), alt-shifr-r (breakpoint)
 autocomplete-python
 file-icons
+atom-python-run
 
 # Installed but haven't widely used
 advanced-open-file -
