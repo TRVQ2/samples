@@ -1,7 +1,5 @@
-##########
-# function determines the summary of all pairs in input list
-##########
 def number_of_pairs_initial_version(gloves):
+    '''function determines the summary of all pairs in input list'''
     count = 0
     for value in list(set(gloves)):
         count += gloves.count(value) // 2
@@ -17,10 +15,8 @@ def number_of_pairs(gloves):
 # print(number_of_pairs(["red", "green", "red", "green", "red", "red", "red"]))
 
 
-##########
-# function determines if the array has a value
-##########
 def check_initial(seq, elem):
+    '''function determines if the array has a value'''
     try:
         str(seq.index(elem))
         return True
@@ -42,10 +38,8 @@ def check(a, e):
 # print("True: " + str(check([101, 45, 75, 105, 99, 107], 107)))
 # print("False: " + str(check([78, 117, 110, 99, 104, 117, 107, 115], 8)))
 
-##########
-# function determines if there is enough fuel
-##########
 def zero_fuel(distance_to_pump, mpg, fuel_left):
+    '''function determines if there is enough fuel'''
     return distance_to_pump <= mpg * fuel_left
 
 
@@ -57,10 +51,8 @@ def bool_to_word(boolean):
     return "Yes" if boolean else "No"
 
 
-##########
-# function determines if candidate is "Senior" or "Open"
-##########
 def open_or_senior_my(data):
+    '''function determines if candidate is "Senior" or "Open"'''
     return ["Senior" if x[0] > 54 and x[1] > 7 else "Open" for x in data]
 
 
@@ -75,10 +67,8 @@ print(["Open", "Open", "Senior", "Open", "Open", "Senior"])
 '''
 
 
-##########
-# function returns sum of the lowest two items of positive integer array
-##########
 def sum_two_smallest_numbers_my(numbers):
+    '''function returns sum of the lowest two items of integer array'''
     return sum(x for x in sorted(numbers)[slice(2)])
 
 
@@ -86,4 +76,4 @@ def sum_two_smallest_numbers_best(numbers):
     return sum(sorted(numbers)[:2])
 
 
-''' print(sum_two_smallest_numbers([19, 5, 42, 2, 77]))  # 7 '''
+# print(sum_two_smallest_numbers([19, 5, 42, 2, 77]))  # 7

@@ -13,7 +13,7 @@ highlight-selected
 plantuml-preview - generate plant uml -  ctrl-alt-p
 language-plantuml
 linter
-linter-pycodestyle
+linter-pycodestyle (https://peps.python.org/pep-0008 - Pep 8 documentation)
 platformio-ide-terminal
 python-debugger - alt-r (toggle), alt-shifr-r (breakpoint)
 autocomplete-python

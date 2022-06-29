@@ -1,15 +1,15 @@
-# that solution returns [''] in case no delimited strings
 def string_to_array(s):
+    '''that solution returns [''] in case no delimited strings'''
     return s.split() or ['']
 
 
-# that solution returns empty array if input string has only spaces
 def string_to_array1(s):
+    '''that solution returns empty array if input string has only spaces'''
     return s.split() if s else ['']
 
 
-# that solution splits to empty strings for each space
 def string_to_array2(s):
+    '''that solution splits to empty strings for each space'''
     return s.split(' ')
 
 
@@ -18,8 +18,6 @@ def string_to_array2(s):
 # print(string_to_array2("         "))
 
 
-#####
-#####
 def count_sheep_mine(n=0):
     result = ""
     for i in range(1, n+1):
@@ -34,26 +32,20 @@ def count_sheep_best(n):
 # print(count_sheep_mine(3))
 
 
-#####
-# Hello world! :)
-#####
 def greet():
+    '''Hello world! :)'''
     return "he%sworld!" % ("llo ")
 
 
-#####
-# Remove exclamation marks
-#####
 def remove_exclamation_marks(s):
+    '''Remove exclamation marks'''
     return s.replace("!", "")
 
 
 # print(remove_exclamation_marks('Hi! Hello!'))
 
-#####
-# Find unique words
-#####
 def findUniqueWords1(str):
+    '''Find unique words'''
     output = []
     for x in str.split():
         if x not in output:

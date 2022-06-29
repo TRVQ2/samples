@@ -1,5 +1,3 @@
-##########
-##########
 def make_negative(number):
     return -number if number > 0 else number
 
@@ -14,8 +12,6 @@ def make_negative1(number):
 # print(make_negative(-5))
 # print(make_negative(22))
 
-##########
-##########
 def invert(list):
     return [-x for x in list]
 
@@ -25,20 +21,14 @@ def invert(list):
 # print(invert([]))  # == []
 
 
-##########
-##########
 def positive_sum(arr):
     return sum(x for x in arr if x > 0)
 
 
-##########
-##########
 def filter_list(list):
     return [x for x in list if type(x) == int]
 
 
-##########
-##########
 def is_square(n):
     return n == 0 or (n > 0 and (n**.5) % 1 == 0)
 
