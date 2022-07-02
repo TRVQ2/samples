@@ -113,7 +113,7 @@ def how_sum(target_sum, numbers, memo=None):  # need to use memo=None
         remained = target_sum - num
         remained_result = how_sum(remained, numbers, memo)
         if remained_result is not None:
-            memo[target_sum] = [*remained_result, num]
+            memo[target_sum] = remained_result + [num]
             return memo[target_sum]
 
     memo[target_sum] = None
@@ -150,7 +150,7 @@ def best_sum(target_sum, numbers, memo=None):  # need to use memo=None
         remained = target_sum - num
         remained_result = best_sum(remained, numbers, memo)
         if remained_result is not None:
-            new_combination = [*remained_result, num]
+            new_combination = remained_result + [num]
             if (shortest_combination is None or
                     len(new_combination) < len(shortest_combination)):
                 shortest_combination = new_combination
@@ -176,7 +176,7 @@ def sum_demo():
     ''' Optimization problem:::
     What is the best way to do it? [the best option]'''
     print("best_sum=", best_sum(7, [2, 3]))  # [3, 2, 2]
-    print("best_sum=", best_sum(7, [5, 3, 4, 7]))  # [4, 3]
+    print("best_sum=", best_sum(7, [5, 3, 4, 7]))  # [7]
     print("best_sum=", best_sum(7, [2, 4]))  # None
     print("best_sum=", best_sum(8, [2, 3, 5]))  # [2, 2, 2, 2]
     print("best_sum=", best_sum(300, [7, 14]))  # None
@@ -268,6 +268,7 @@ def all_contstruct(target, word_bank, memo=None):
             2nd level array, e..g [[..., 1, 2, 3], [..., 5, 6]]. Then
             concatenate it with the result array
             '''
+            # the same as [[word] + x for x in suffix_ways]
             result += [[word, *x] for x in suffix_ways]
 
     memo[target] = result
@@ -299,23 +300,32 @@ def construct_demo():
     #     'e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'
     # ]))   # 0
     ''' All constructs '''
-    print(all_contstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))  # 2
-    print(all_contstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))  # 1
+    print(all_contstruct('', ['purp', 'p', 'ur', 'le', 'purpl']))  # [[]]
+    print(all_contstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
+    # [['purp', 'le'], ['p', 'ur', 'p', 'le']
+    print(all_contstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+    # [['abc', 'def']]
     print(all_contstruct('skateboard', [
         'bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'
-    ]))   # 0
+    ]))  # []
     print(all_contstruct('enterapotentpot', [
         'a', 'p', 'ent', 'enter', 'ot', 'o', 't'
-    ]))   # 4
+    ]))
+    '''[
+        ['enter', 'a', 'p', 'ot', 'ent', 'p', 'ot'],
+        ['enter', 'a', 'p', 'ot', 'ent', 'p', 'o', 't'],
+        ['enter', 'a', 'p', 'o', 't', 'ent', 'p', 'ot'],
+        ['enter', 'a', 'p', 'o', 't', 'ent', 'p', 'o', 't']
+    ]'''
     print(all_contstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
         'e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'
-    ]))   # 0
+    ]))   # []
 
 
 def main():
-    # fib_demo()
-    # grid_traveler_demo()
-    # sum_demo()
+    fib_demo()
+    grid_traveler_demo()
+    sum_demo()
     construct_demo()
 
 
