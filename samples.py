@@ -1,18 +1,18 @@
 def number_of_pairs_initial_version(gloves):
     '''function determines the summary of all pairs in input list'''
     count = 0
-    for value in list(set(gloves)):
+    for value in frozenset(gloves):
         count += gloves.count(value) // 2
     return count
 
 
 def number_of_pairs(gloves):
-    return sum(gloves.count(color) // 2 for color in set(gloves))
+    return sum(gloves.count(color) // 2 for color in frozenset(gloves))
 
 
 # That one below via lambda function is also working
 # number_of_pairs_from_codewars = lambda g: sum(g.count(i)//2for i in set(g))
-# print(number_of_pairs(["red", "green", "red", "green", "red", "red", "red"]))
+print(number_of_pairs(["red", "green", "red", "green", "red", "red", "red"]))
 
 
 def check_initial(seq, elem):
