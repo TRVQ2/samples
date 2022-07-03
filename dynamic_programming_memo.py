@@ -113,7 +113,8 @@ def how_sum(target_sum, numbers, memo=None):  # need to use memo=None
         remained = target_sum - num
         remained_result = how_sum(remained, numbers, memo)
         if remained_result is not None:
-            memo[target_sum] = remained_result + [num]
+            # below is faster than: memo[target_sum] = remained_result + [num]
+            memo[target_sum] = [*remained_result, num]
             return memo[target_sum]
 
     memo[target_sum] = None
@@ -150,7 +151,8 @@ def best_sum(target_sum, numbers, memo=None):  # need to use memo=None
         remained = target_sum - num
         remained_result = best_sum(remained, numbers, memo)
         if remained_result is not None:
-            new_combination = remained_result + [num]
+            # below is faster than: new_combination = remained_result + [num]
+            new_combination = [*remained_result, num]
             if (shortest_combination is None or
                     len(new_combination) < len(shortest_combination)):
                 shortest_combination = new_combination
@@ -268,7 +270,7 @@ def all_contstruct(target, word_bank, memo=None):
             2nd level array, e..g [[..., 1, 2, 3], [..., 5, 6]]. Then
             concatenate it with the result array
             '''
-            # the same as [[word] + x for x in suffix_ways]
+            # bellow is a bit better than: [[word] + x for x in suffix_ways]
             result += [[word, *x] for x in suffix_ways]
 
     memo[target] = result

@@ -4,10 +4,9 @@ def fib(n=0):
     which is much better than Brute Force strategy without Tabulation:
         O(2 ^ n) time; O(n) space
     '''
-    table = [0] * (n + 1)
-    table[1] = 1
-
     end_loop = n - 1
+    table = [0, 1] + [0] * end_loop
+
     for i in range(1, end_loop):
         table[i + 1] += table[i]
         table[i + 2] += table[i]
@@ -71,7 +70,7 @@ def can_sum(target_sum, numbers):
 
     for i, value in enumerate(table):
         if value:
-            for num in [x for x in numbers if i + x <= target_sum]:
+            for num in (x for x in numbers if i + x <= target_sum):
                 table[i + num] = value
     return table[target_sum]
 
@@ -93,7 +92,7 @@ def how_sum(target_sum, numbers):
 
     for i, value in enumerate(table):
         if value is not None:
-            for num in [x for x in numbers if i + x <= target_sum]:
+            for num in (x for x in numbers if i + x <= target_sum):
                 table[i + num] = table[i] + [num]
     return table[target_sum]
 
@@ -115,7 +114,7 @@ def best_sum(target_sum, numbers):
 
     for i, value in enumerate(table):
         if value is not None:
-            for num in [x for x in numbers if i + x <= target_sum]:
+            for num in (x for x in numbers if i + x <= target_sum):
                 path = table[i] + [num]
                 item_to_update = table[i + num]
                 if item_to_update is None or len(item_to_update) > len(path):
@@ -206,14 +205,16 @@ def all_contstruct(target, word_bank):
         ~O(n ^ m) time; ~O(n ^ m) space
     '''
     target_length = len(target)
-    # to have something like [[[]], [], [], [], [], [], []]
+    # to have something like [[[]], [], [], []]
     table = [[[]]] + [[] for i in range(target_length)]
 
     for i in range(target_length):
         for word in word_bank:
             end_matching_part = i + len(word)
             if target[i:end_matching_part] == word:
-                table[end_matching_part] += [x + [word] for x in table[i]]
+                # table[end_matching_part] += [x + [word] for x in table[i]]
+                # below one has better performance
+                table[end_matching_part] += [[*x, word] for x in table[i]]
         table[i] = None  # to clean up a bit the space usage
     return table[target_length]
 
