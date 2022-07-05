@@ -1,0 +1,13 @@
+[
+	{
+		"entity": {
+			"id": "14_111",
+			"marketTypeId": "111",
+			"marketTypeName": "Group Winner (111)",
+			"sportId": "14",
+			"playType": "PRE_PLAY",
+			"betBuilder": false
+		},
+		"translations": null
+	}
+]

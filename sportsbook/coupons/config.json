@@ -1,0 +1,6 @@
+{
+	"brands": {"vb": "vb", "vbuk": "vbuk", "uk": "ls", "ng":"lba", "nl": "nl"},
+	"envs": {"dev": "dev-", "test": "test-", "staging": "ppc2-", "live": "sports"},
+	"get_all_coupons_url": "https://{}admin.virginbet.com/api/betting/{}/v1/coupons?limit=500",
+	"update_coupon_url": "https://{}admin.virginbet.com/api/betting/{}/v1/coupons"
+}
