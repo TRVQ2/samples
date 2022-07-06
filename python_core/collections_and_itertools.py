@@ -5,7 +5,7 @@ from collections import Counter, namedtuple, defaultdict, deque
 from itertools import product, permutations, combinations, accumulate
 from itertools import combinations_with_replacement, groupby
 from itertools import count, cycle, repeat
-# import orepator ???
+import operator
 
 ''' Counter '''
 a = "aaaaabbbbbbccccccccddd"
@@ -80,8 +80,8 @@ print()
 a = [1, 2, 3, 4]
 print(a)
 print(f'list(accumulate(a))={list(accumulate(a))} by default it sums elements')
-# acc = accumulate(a, func=operator.mul)
-# print(f'list(accumulate(a))={list(acc)} by default it sums elements')
+acc = accumulate(a, func=operator.mul)
+print(f'list(accumulate(a))={list(acc)} set mul operator for multiplication')
 print()
 
 ''' intertools.groupby '''
