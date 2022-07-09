@@ -1,0 +1,2 @@
+https://www.mongodb.com/developer/languages/python/python-change-streams/ - instruction to setup that sample
+https://cloud.mongodb.com/v2/62c8d34f871401433639cee5#clusters - here I created MongoDB cluster

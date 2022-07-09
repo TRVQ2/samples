@@ -1,0 +1,27 @@
+{
+	"_id": {
+		"_data": "8262C8DD0D000000022B022C0100296E5A1004C2188F4D6BC1440CA8B7E48767B4ADDB46645F6964006462C8DD0E71336310ED3BA4D60004"
+	},
+	"operationType": "insert",
+	"clusterTime": {
+		"$timestamp": {
+			"t": 1657330957,
+			"i": 2
+		}
+	},
+	"fullDocument": {
+		"_id": {
+			"$oid": "62c8dd0e71336310ed3ba4d6"
+		},
+		"hello": "world"
+	},
+	"ns": {
+		"db": "changestream",
+		"coll": "collection"
+	},
+	"documentKey": {
+		"_id": {
+			"$oid": "62c8dd0e71336310ed3ba4d6"
+		}
+	}
+}
