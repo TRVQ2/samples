@@ -35,7 +35,8 @@ GIL: Global Interpreter Lock
     - Use Python as a wrapper for third-party libraries (C/C++) -> NumPy, SciPy
 '''
 from multiprocessing import Process
-from threading import Thread
+from threading import Thread, Lock, current_thread
+from queue import Queue
 import os
 import time
 
@@ -92,7 +93,108 @@ def threads_main():
     print("End threads main")
 
 
+global_variable = 0
+
+
+def using_lock():
+    def increase():
+        global global_variable
+        local_copy = global_variable
+        local_copy += 1
+        time.sleep(0.1)
+        global_variable = local_copy
+        print(global_variable)
+
+    def increase_no_lock(*args):
+        ''' increase without lock -> racing conditions '''
+        increase()
+
+    def increase_lock_1(lock: Lock):
+        ''' with lock.aquire() and lock.release() '''
+        lock.acquire()
+        increase()
+        lock.release()
+
+    def increase_lock_2(lock: Lock):
+        with lock:
+            increase()
+
+    def run_thread_example(func):
+        lock = Lock()
+        print("Beginning example:", global_variable)
+        tread1 = Thread(target=func, args=(lock,))
+        tread2 = Thread(target=func, args=(lock,))
+        tread1.start()
+        tread2.start()
+        tread1.join()
+        tread2.join()
+        print("End example:", global_variable, '\n')
+
+    global global_variable
+    global_variable = 0
+    run_thread_example(increase_no_lock)
+    global_variable = 0
+    run_thread_example(increase_lock_1)
+    global_variable = 0
+    run_thread_example(increase_lock_2)
+
+
+def using_queues():
+    q = Queue()
+    for i in range(10):
+        q.put(i)
+
+    def process_queue(q, lock):
+        item = q.get()
+        with lock:
+            print(f"{current_thread().name}, processing item={item}")
+        time.sleep(1)
+        q.task_done()
+
+    def process_queue_at_once(q, lock):
+        while not q.empty():
+            process_queue(q, lock)
+
+    def process_queue_infinite(q, lock):
+        while True:
+            process_queue(q, lock)
+
+    lock = Lock()  # to sync using queue value in print
+
+    def init_thread(func, i, daemon=False):
+        print("== Init thread", i)
+        t = Thread(target=func, args=(q, lock))
+        ''' Daemon is the background thread that will die when main thread. If
+        we don use it, then we need to pass signal to break infinite loop in
+        process_queue_infinite(q, lock) function
+        '''
+        t.daemon = daemon
+        print("== Start thread", i)
+        t.start()
+
+    for i in range(1, 4):
+        init_thread(process_queue_at_once, i)
+    for i in range(4, 7):
+        init_thread(process_queue_infinite, i, True)
+
+    print("== Pause 4sec to stop threads with process_queue_at_once()")
+    time.sleep(4)  # just to wait for  threads to finish
+    print("== Adding 10 more items")
+    for i in range(10, 20):
+        q.put(i)
+    print("== Pause 2sec before q.join() to show it doesn't affect threads")
+    time.sleep(2)
+    print("== q.join to pause main thread until finish processing queue")
+    q.join()
+    print("== Finish")
+
+
 if __name__ == '__main__':
-    # freeze_support()
-    processes_main()
-    threads_main()
+#    print("Processes =====================")
+#    processes_main()
+#    print("Threads =====================")
+#    threads_main()
+#    print("Locks =====================")
+#    using_lock()
+#    print("Queues =====================")
+    using_queues()
