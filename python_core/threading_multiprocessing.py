@@ -34,7 +34,8 @@ GIL: Global Interpreter Lock
     - Use a different, free-threaded Python implementation (Jython, IronPython)
     - Use Python as a wrapper for third-party libraries (C/C++) -> NumPy, SciPy
 '''
-from multiprocessing import Process
+from multiprocessing import Process, Value, Array, Pool
+from multiprocessing import Lock as MLock, Queue as MQueue
 from threading import Thread, Lock, current_thread
 from queue import Queue
 import os
@@ -70,6 +71,82 @@ def processes_main():
     print("End processes main")
 
 
+def add_100(number, lock):
+    for i in range(100):
+        time.sleep(0.01)
+        with lock:
+            number.value += 1
+
+
+def add_100_to_array(number, lock):
+    for i in range(100):
+        time.sleep(0.01)
+        for num in range(len(number)):
+            with lock:
+                number[num] += 1
+
+
+def processes_using_lock():
+    def threads_init_start_join(func, args):
+        p1 = Process(target=func, args=args)
+        p2 = Process(target=func, args=args)
+        p1.start()
+        p2.start()
+        p1.join()
+        p2.join()
+
+    lock = MLock()
+    shared_number = Value('i', 0)
+    print("Number at the beginning is", shared_number.value)
+    threads_init_start_join(add_100, (shared_number, lock))
+    print("Number at the end is", shared_number.value)
+
+    shared_array = Array('d', [0.0, 100.0, 200.0])
+    print("Array at the beginning is", shared_array[:])
+    threads_init_start_join(add_100_to_array, (shared_array, lock))
+    print("Array at the end is", shared_array[:])
+
+
+def square(numbers, q):
+    for i in numbers:
+        q.put(i * i)
+        time.sleep(0.01)
+
+
+def make_negative(numbers, q):
+    for i in numbers:
+        q.put(-i)
+        time.sleep(0.01)
+
+
+def processes_using_queues():
+    q = MQueue()
+    numbers = range(1, 6)
+    p1 = Process(target=square, args=(numbers, q))
+    p2 = Process(target=make_negative, args=(numbers, q))
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+
+    while not q.empty():
+        print(q.get())
+
+
+def cube(number):
+    return number * number * number
+
+
+def processes_using_pool():
+    # map, apply, join, close
+    pool = Pool()
+    numbers = range(10)
+    result = pool.map(cube, numbers)
+    pool.close()
+    pool.join()
+    print(result)
+
+
 def threads_main():
     threads = []
     num_threads = 10
@@ -96,7 +173,7 @@ def threads_main():
 global_variable = 0
 
 
-def using_lock():
+def threads_using_lock():
     def increase():
         global global_variable
         local_copy = global_variable
@@ -139,7 +216,7 @@ def using_lock():
     run_thread_example(increase_lock_2)
 
 
-def using_queues():
+def threads_using_queues():
     q = Queue()
     for i in range(10):
         q.put(i)
@@ -192,9 +269,15 @@ def using_queues():
 if __name__ == '__main__':
 #    print("Processes =====================")
 #    processes_main()
+#    print("Processes Locks =====================")
+#    processes_using_lock()
+#    print("Processes Queue =====================")
+#    processes_using_queues()
+    print("Processes Pool =====================")
+    processes_using_pool()
 #    print("Threads =====================")
 #    threads_main()
-#    print("Locks =====================")
-#    using_lock()
-#    print("Queues =====================")
-    using_queues()
+#    print("Threads Locks =====================")
+#    threads_using_lock()
+#    print("Threads Queues =====================")
+#    threads_using_queues()
