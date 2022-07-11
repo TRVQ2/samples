@@ -44,9 +44,11 @@ for item in parameters:
         if (attributes is not None and len(attributes) > 0):
             for i in attributes[::-1]:
                 if i['type'] in ('participantType', 'team'):
+                    print(f"item['entity']={item['entity']}, i['type']={i['type']}")
                     attributes.remove(i)
                 elif i['type'] == 'periodType':
                     if i['value'] not in ("10MIN", "FH", "SH", "FT"):
+                        print(f"item['entity']={item['entity']}, i['value']={i['value']}")
                         attributes.remove(i)
 
 json_dump = json.dumps(parameters, indent=2)
