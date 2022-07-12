@@ -1,0 +1,7 @@
+{
+	"brands": {"vb": "vb", "vbuk": "vbuk", "uk": "ls", "ng":"lba", "nl": "nl"},
+	"envs": {"dev": "dev-", "test": "test-", "staging": "ppc2-", "live": "sports"},
+	"get_all_bbmg_url": "https://dev-admin.virginbet.com/api/betting/vb/v1/betbuilder/marketgroups/sport/14",
+	"get_bbmg_translation": "https://dev-admin.virginbet.com/api/betting/vb/v1/translator/{}",
+	"update_bbmg_url": "https://{}admin.virginbet.com/api/betting/{}/v1/betbuilder/marketgroups/{}"
+}
