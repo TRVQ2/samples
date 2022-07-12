@@ -1,0 +1,10 @@
+db.getCollection("UserSettings").updateMany(
+    {
+        "_id": { "$in": ["18507341"]}
+    },
+    {
+        "$set": {
+            "liveAlerts": null
+        }
+    }
+);
