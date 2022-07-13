@@ -3,8 +3,12 @@ import csv
 
 json_file_name = "market_types.json"
 csv_file_name = "SC.csv"
-json_list = json.loads(open(json_file_name, 'r').read())
-csv_list = list(csv.DictReader(open(csv_file_name)))
+
+with open(json_file_name, 'r') as f:
+    json_list = json.loads(f.read())
+
+with open(csv_file_name, 'r') as f:
+    csv_list = list(csv.DictReader(f))
 
 assert len(json_list) == len(csv_list), "Length is different"
 

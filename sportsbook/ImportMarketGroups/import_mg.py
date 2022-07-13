@@ -2,7 +2,8 @@ import json
 
 is_it_for_nl = True
 file_name = "exportAllMarketGroups.json"
-parameters = json.loads(open(file_name, 'r').read())
+with open(file_name, 'r') as f:
+    parameters = json.loads(f.read())
 
 
 def build_name_translation(entityId, value):
@@ -90,4 +91,5 @@ for item in parameters:
 
 
 json_dump = json.dumps(parameters, indent=2)
-open("out_" + file_name, 'w').write(json_dump)
+with open("out_" + file_name, 'w') as f:
+    f.write(json_dump)

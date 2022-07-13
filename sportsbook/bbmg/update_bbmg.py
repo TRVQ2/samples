@@ -33,7 +33,8 @@ def update_bbmg_list(url, list, env, brand):
 
 
 def import_bbmg(brand, env, session):
-    parameters = json.loads(open('config.json').read())
+    with open('config.json', 'r') as f:
+        parameters = json.loads(f.read())
     brands = parameters['brands']
     envs = parameters['envs']
     get_url = parameters['get_all_bbmg_url']

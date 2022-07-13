@@ -2,7 +2,8 @@ import csv
 import json
 
 csv_file_name = "SC.csv"
-csv_list = list(csv.DictReader(open(csv_file_name)))
+with open(csv_file_name, 'r') as f:
+    csv_list = list(csv.DictReader(f))
 
 output = []
 for i in csv_list:
@@ -31,4 +32,5 @@ for i in csv_list:
     output.append(market_type)
 
 json_dump = json.dumps(output, indent=2)
-open("out.json", 'w').write(json_dump)
+with open("out.json", 'w') as f:
+    f.write(json_dump)

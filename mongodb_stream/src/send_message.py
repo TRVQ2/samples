@@ -2,7 +2,8 @@ import os
 import pymongo
 import json
 
-parameters = json.loads(open('../env_config.json').read())
+with open('../env_config.json', 'r') as f:
+    parameters = json.loads(f.read())
 client = pymongo.MongoClient(parameters['CONNECTION_STR'])
 db = client[parameters['DB_NAME']]
 collection = db[parameters['COLLECTION']]

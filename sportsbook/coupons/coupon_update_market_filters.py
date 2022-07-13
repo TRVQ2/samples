@@ -52,7 +52,8 @@ def check_market_filters(list):
 
 
 def update_coupon_market_filters(brand, env, session):
-    parameters = json.loads(open('config.json').read())
+    with open('config.json', 'r') as f:
+        parameters = json.loads(f.read())
     brands = parameters['brands']
     envs = parameters['envs']
     get_url = parameters['get_all_coupons_url'] \
