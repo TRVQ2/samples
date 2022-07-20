@@ -1,0 +1,22 @@
+[
+	{
+		"id": "62ce9235e49ae70006856c45",
+		"username": "jack.eagles",
+		"product": "BETTING",
+		"brand": "NL",
+		"component": "AUTHENTICATION",
+		"action": "Logged in",
+		"reason": "",
+		"timestamp": 1657705013
+	},
+	{
+		"id": "62ce92f1e49ae70006856c52",
+		"username": "Stephan.kramers",
+		"product": "BETTING",
+		"brand": "NL",
+		"component": "TRANSLATIONS_DK_MNG",
+		"action": "",
+		"reason": "",
+		"timestamp": 1657705201
+	}
+]
