@@ -11,7 +11,7 @@ with open(file_name, "r") as file:
         dict = json.loads(line)
         if "liveAlerts" in dict:
             live_alerts = dict["liveAlerts"]
-            if "defaultHappenings" in live_alerts:
+            if live_alerts and "defaultHappenings" in live_alerts:
                 default_happenings = live_alerts["defaultHappenings"]
                 if len(default_happenings) > 6:
                     out.append(dict["_id"])
